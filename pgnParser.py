@@ -18,13 +18,13 @@ def pgn_to_moves(game_file):
 	comments_removed = STRC.sub(" ", comments_marked)
 	STR_marked = comments_marked.replace("[", "<").replace("]", ">")
 	str_removed = STRC.sub(" ", STR_marked)
-  MOVE_NUM = re.compile("[1-9][0-9]* *\. ")
-  just_moves = [_.strip() for _ in MOVE_NUM.split(str_removed)]
-  last_move = just_moves[-1]
-  RESULT = re.compile("(1-0|0-1|1/2-1/2)")
-  last_move = RESULT.sub("", last_move)
-  moves = just_moves[:-1]+[last_move]
-  return [_ for _ in moves if len(_) > 0 ]
+  	MOVE_NUM = re.compile("[1-9][0-9]* *\. ")
+  	just_moves = [_.strip() for _ in MOVE_NUM.split(str_removed)]
+  	last_move = just_moves[-1]
+  	RESULT = re.compile("(1-0|0-1|1/2-1/2)")
+  	last_move = RESULT.sub("", last_move)
+  	moves = just_moves[:-1]+[last_move]
+  	return [_ for _ in moves if len(_) > 0 ]
 
 def pre_process_a_move(move):
 	wmove, bmove = move.split()
@@ -90,14 +90,14 @@ def castling(board_view, piece_view, king, rook, king_intial_position, king_fina
 def king_castling(board_view, piece_view, colour):
 	if colour == 'W':
 		return castling(board_view, piece_view, 'K', 'R', 'e1', 'g1', 'f1', 'h1')
-    else:
-    	return castling(board_view, piece_view, 'k', 'r', 'e8', 'g8', 'f8', 'h8')
+    	else:
+    		return castling(board_view, piece_view, 'k', 'r', 'e8', 'g8', 'f8', 'h8')
 
 def queen_castling(board_view, piece_view, colour):
 	if colour == 'W':
 		return castling(board_view, piece_view, 'K', 'R', 'e1', 'c1', 'a1', 'd1')
-    else:
-    	return castling(board_view, piece_view, 'k', 'r', 'e8', 'c8', 'a8', 'd8')
+    	else:
+    		return castling(board_view, piece_view, 'k', 'r', 'e8', 'c8', 'a8', 'd8')
     
  def en_passant(board_view, piece_view, piece, final_position, colour):
 
@@ -105,6 +105,7 @@ def queen_castling(board_view, piece_view, colour):
 	board_view[final_position] = board_view[captured_pawn_position]
 	board_view[captured_pawn_position] = ' '
 	piece_view[board_view[final_position]] = final_position
+	return board_view, piece_view
 
 def make_pawn_move(board_view, piece_view, piece, extra, final_position, colour):
     
